@@ -5,7 +5,7 @@ import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
 import ParticleBackground from './ParticleBackground';
 import NeonGrid from './NeonGrid';
-import DefenseAnimations from './DefenseAnimations';
+import DefenseSlideshow from './DefenseSlideshow';
 import LoadingSpinner from './LoadingSpinner';
 import ErrorMessage from './ErrorMessage';
 import usePortfolio from '../hooks/usePortfolio';
@@ -148,9 +148,9 @@ const Portfolio = () => {
               </div>
             </div>
 
-            {/* Defense Animations Component - Replaces Spline */}
+            {/* Defense Slideshow Component - Uses Your Images */}
             <div className="hidden lg:block">
-              <DefenseAnimations />
+              <DefenseSlideshow />
             </div>
 
             {/* Mobile Alternative - Enhanced Animated Gradient */}
