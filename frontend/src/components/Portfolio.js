@@ -6,24 +6,74 @@ import { Badge } from './ui/badge';
 import Spline from '@splinetool/react-spline';
 import ParticleBackground from './ParticleBackground';
 import NeonGrid from './NeonGrid';
-import portfolioData from '../mock';
+import LoadingSpinner from './LoadingSpinner';
+import ErrorMessage from './ErrorMessage';
+import usePortfolio from '../hooks/usePortfolio';
+import { resumeAPI } from '../services/api';
 
 const Portfolio = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { portfolioData, loading, error, refetchPortfolio } = usePortfolio();
+  const [resumeDownloading, setResumeDownloading] = useState(false);
 
-  const handleResumeDownload = () => {
-    setIsLoading(true);
-    // Mock download - will be replaced with actual API call
-    setTimeout(() => {
-      const link = document.createElement('a');
-      link.href = portfolioData.personal.resumeUrl;
-      link.download = 'Arya_G_Guddad_Resume.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      setIsLoading(false);
-    }, 1000);
+  const handleResumeDownload = async () => {
+    try {
+      setResumeDownloading(true);
+      await resumeAPI.downloadResume();
+    } catch (error) {
+      console.error('Resume download failed:', error);
+      // You could show a toast notification here
+      alert('Resume download failed. Please try again later.');
+    } finally {
+      setResumeDownloading(false);
+    }
   };
+
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white relative overflow-hidden">
+        <ParticleBackground />
+        <NeonGrid />
+        <div className="content-layer">
+          <LoadingSpinner size="large" message="Initializing quantum matrix..." />
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-black text-white relative overflow-hidden">
+        <ParticleBackground />
+        <NeonGrid />
+        <div className="content-layer">
+          <ErrorMessage 
+            message={error} 
+            onRetry={refetchPortfolio}
+            showRetry={true}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Show portfolio if data is loaded
+  if (!portfolioData) {
+    return (
+      <div className="min-h-screen bg-black text-white relative overflow-hidden">
+        <ParticleBackground />
+        <NeonGrid />
+        <div className="content-layer">
+          <ErrorMessage 
+            message="Portfolio data not found" 
+            onRetry={refetchPortfolio}
+            showRetry={true}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -71,10 +121,10 @@ const Portfolio = () => {
                 <Button 
                   className="bg-red-500 hover:bg-red-600 text-black font-bold px-8 py-6 text-lg border-0 rounded-none btn-cyber pulse-glow"
                   onClick={handleResumeDownload}
-                  disabled={isLoading}
+                  disabled={resumeDownloading}
                 >
                   <Download className="mr-2 h-5 w-5" />
-                  {isLoading ? 'Downloading...' : 'Download Resume'}
+                  {resumeDownloading ? 'Downloading...' : 'Download Resume'}
                 </Button>
                 <Button 
                   variant="outline" 
@@ -186,7 +236,7 @@ const Portfolio = () => {
             <div className="cyber-border bg-black/40 p-6 rounded-lg backdrop-blur-sm">
               <h3 className="text-xl font-bold mb-4 text-red-500 neon-glow">Web Development</h3>
               <div className="flex flex-wrap gap-2">
-                {portfolioData.skills.webDevelopment.map((skill, index) => (
+                {portfolioData.skills.web_development.map((skill, index) => (
                   <Badge key={index} variant="outline" className="border-red-500/30 text-white hover:bg-red-500/10 hover:neon-glow transition-all duration-300">
                     {skill}
                   </Badge>
@@ -208,7 +258,7 @@ const Portfolio = () => {
             <div className="cyber-border bg-black/40 p-6 rounded-lg backdrop-blur-sm">
               <h3 className="text-xl font-bold mb-4 text-red-500 neon-glow">Domain Interests</h3>
               <div className="flex flex-wrap gap-2">
-                {portfolioData.skills.domainInterests.map((skill, index) => (
+                {portfolioData.skills.domain_interests.map((skill, index) => (
                   <Badge key={index} variant="outline" className="border-red-500/30 text-white hover:bg-red-500/10 hover:neon-glow transition-all duration-300">
                     {skill}
                   </Badge>
@@ -244,7 +294,7 @@ const Portfolio = () => {
                   <div>
                     <h3 className="text-2xl font-bold mb-2 gradient-text">{portfolioData.education.degree}</h3>
                     <p className="text-xl text-red-500 mb-2 neon-glow">{portfolioData.education.institution}</p>
-                    <p className="text-gray-400">Expected Graduation: {portfolioData.education.expectedGraduation}</p>
+                    <p className="text-gray-400">Expected Graduation: {portfolioData.education.expected_graduation}</p>
                   </div>
                   <Code className="h-12 w-12 text-red-500 neon-glow pulse-glow" />
                 </div>
@@ -303,7 +353,7 @@ const Portfolio = () => {
                   </div>
                   
                   <div className="flex gap-4">
-                    {project.demoAvailable ? (
+                    {project.demo_available ? (
                       <Button className="bg-red-500 hover:bg-red-600 text-black font-bold border-0 rounded-none btn-cyber">
                         <ExternalLink className="mr-2 h-4 w-4" />
                         Live Demo
