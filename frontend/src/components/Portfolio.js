@@ -258,7 +258,86 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Projects Section */}
+      <section id="projects" className="py-20">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold mb-12 text-center">
+            Current <span className="text-red-500">Projects</span>
+          </h2>
+          
+          <div className="max-w-4xl mx-auto">
+            {portfolioData.projects.map((project) => (
+              <Card key={project.id} className="bg-black border-red-500/20 hover:border-red-500/40 transition-colors mb-8">
+                <CardContent className="p-8">
+                  <div className="flex items-start justify-between mb-6">
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+                      <Badge variant="outline" className="border-red-500 text-red-500">
+                        {project.status}
+                      </Badge>
+                    </div>
+                    <Code className="h-12 w-12 text-red-500" />
+                  </div>
+                  
+                  <p className="text-gray-300 mb-6 leading-relaxed">
+                    {project.description}
+                  </p>
+                  
+                  <div className="mb-6">
+                    <h4 className="text-lg font-bold mb-3">Technologies Used</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech, index) => (
+                        <Badge key={index} variant="outline" className="border-red-500/30 text-white hover:bg-red-500/10">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-4">
+                    {project.demoAvailable ? (
+                      <Button className="bg-red-500 hover:bg-red-600 text-black font-bold border-0 rounded-none">
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Live Demo
+                      </Button>
+                    ) : (
+                      <Button disabled className="bg-gray-700 text-gray-400 font-bold border-0 rounded-none cursor-not-allowed">
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Demo Coming Soon
+                      </Button>
+                    )}
+                    
+                    <Button variant="outline" className="border-red-500/30 text-red-500 hover:bg-red-500/10 rounded-none">
+                      <Github className="mr-2 h-4 w-4" />
+                      View Code
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+            
+            {/* Certifications */}
+            <div className="mt-12">
+              <h3 className="text-2xl font-bold mb-6 text-center">
+                Active <span className="text-red-500">Certifications</span>
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                {portfolioData.certifications.map((cert, index) => (
+                  <Card key={index} className="bg-black border-red-500/20 hover:border-red-500/40 transition-colors">
+                    <CardContent className="p-6">
+                      <h4 className="text-lg font-bold mb-2">{cert.title}</h4>
+                      <p className="text-red-500 mb-2">{cert.provider}</p>
+                      <Badge variant="outline" className="border-yellow-500 text-yellow-500">
+                        {cert.status}
+                      </Badge>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <section id="contact" className="py-20">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-12">
