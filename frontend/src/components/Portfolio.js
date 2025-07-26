@@ -95,11 +95,19 @@ const Portfolio = () => {
             {/* 3D Spline Component */}
             <div className="hidden lg:block">
               <div className="w-full h-[600px] relative overflow-visible">
+                <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-transparent rounded-lg"></div>
                 <Spline 
                   scene="https://prod.spline.design/NbVmy6DPLhY-5Lvg/scene.splinecode"
                   style={{ width: '100%', height: '100%' }}
                 />
               </div>
+            </div>
+
+            {/* Mobile Alternative - Animated Gradient */}
+            <div className="lg:hidden flex items-center justify-center h-[400px] relative overflow-hidden">
+              <div className="w-64 h-64 bg-gradient-to-r from-red-500/20 to-red-700/20 rounded-full blur-xl animate-pulse"></div>
+              <div className="absolute w-48 h-48 bg-gradient-to-l from-red-600/30 to-red-400/30 rounded-full blur-lg animate-ping"></div>
+              <div className="absolute w-32 h-32 bg-red-500/40 rounded-full blur-md"></div>
             </div>
           </div>
         </div>
