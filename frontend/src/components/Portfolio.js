@@ -3,9 +3,9 @@ import { Download, ExternalLink, Github, Linkedin, Mail, Phone, MapPin, ChevronR
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
-import Spline from '@splinetool/react-spline';
 import ParticleBackground from './ParticleBackground';
 import NeonGrid from './NeonGrid';
+import DefenseAnimations from './DefenseAnimations';
 import LoadingSpinner from './LoadingSpinner';
 import ErrorMessage from './ErrorMessage';
 import usePortfolio from '../hooks/usePortfolio';
@@ -148,16 +148,9 @@ const Portfolio = () => {
               </div>
             </div>
 
-            {/* 3D Spline Component with Enhanced Effects */}
+            {/* Defense Animations Component - Replaces Spline */}
             <div className="hidden lg:block">
-              <div className="w-full h-[600px] relative overflow-visible">
-                <div className="absolute inset-0 bg-gradient-radial from-red-500/10 via-transparent to-transparent rounded-lg pulse-glow"></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 to-transparent rounded-lg"></div>
-                <Spline 
-                  scene="https://prod.spline.design/NbVmy6DPLhY-5Lvg/scene.splinecode"
-                  style={{ width: '100%', height: '100%' }}
-                />
-              </div>
+              <DefenseAnimations />
             </div>
 
             {/* Mobile Alternative - Enhanced Animated Gradient */}

@@ -1,4 +1,4 @@
-/* Enhanced Futuristic Portfolio Styles */
+/* Enhanced Futuristic Portfolio Styles with Defense Animations */
 
 * {
   margin: 0;
@@ -138,6 +138,56 @@ html {
   }
 }
 
+@keyframes scan-slow {
+  0% {
+    top: -2px;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes scan-reverse-slow {
+  0% {
+    top: 100%;
+  }
+  100% {
+    top: -2px;
+  }
+}
+
+@keyframes scan-vertical {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes radar-sweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+}
+
 @keyframes matrix-rain {
   0% {
     transform: translateY(-100vh);
@@ -163,6 +213,43 @@ html {
   50% {
     opacity: 0.8;
     transform: scale(1.05);
+  }
+}
+
+/* Defense Animation Keyframes */
+@keyframes rotate-y-12 {
+  0%, 100% {
+    transform: rotateY(12deg);
+  }
+  50% {
+    transform: rotateY(18deg);
+  }
+}
+
+@keyframes rotate-y-45 {
+  0%, 100% {
+    transform: rotateY(45deg);
+  }
+  50% {
+    transform: rotateY(50deg);
+  }
+}
+
+@keyframes rotate-y-90 {
+  0%, 100% {
+    transform: rotateY(90deg);
+  }
+  50% {
+    transform: rotateY(95deg);
+  }
+}
+
+@keyframes rotate-x-12 {
+  0%, 100% {
+    transform: rotateX(12deg);
+  }
+  50% {
+    transform: rotateX(18deg);
   }
 }
 
@@ -193,6 +280,55 @@ html {
 
 .animate-scan-reverse {
   animation: scan-reverse 8s linear infinite;
+}
+
+.animate-scan-slow {
+  animation: scan-slow 12s linear infinite;
+}
+
+.animate-scan-reverse-slow {
+  animation: scan-reverse-slow 15s linear infinite;
+}
+
+.animate-scan-vertical {
+  animation: scan-vertical 3s linear infinite;
+}
+
+.animate-radar-sweep {
+  animation: radar-sweep 4s linear infinite;
+}
+
+.animate-slide-right {
+  animation: slide-right 2s ease-in-out infinite;
+}
+
+.scanning-radar {
+  animation: scan-vertical 3s linear infinite;
+}
+
+.radar-sweep {
+  animation: radar-sweep 4s linear infinite;
+}
+
+/* Defense Animation Classes */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.rotate-x-12 {
+  animation: rotate-x-12 6s ease-in-out infinite;
+}
+
+.rotate-y-12 {
+  animation: rotate-y-12 4s ease-in-out infinite;
+}
+
+.rotate-y-45 {
+  animation: rotate-y-45 5s ease-in-out infinite;
+}
+
+.rotate-y-90 {
+  animation: rotate-y-90 6s ease-in-out infinite;
 }
 
 /* Enhanced gradient text effect */
